@@ -2,12 +2,12 @@
 This repo contains a setup to get started with the Google Analytics Reporting API v4 in Python. It takes three steps:
 
 # 1. Create a project
-First, create a project in your Google Developer console. I highly recommend using [the 17 steps of this post](https://www.themarketingtechnologist.co/google-oauth-2-enable-your-application-to-access-data-from-a-google-user/). Add a `credentials.py` file and create variables for the `client_id`, `client_secret` and `redirect_uri` and fill out the corresponding values.
+First, create a project in your Google Developer console. I highly recommend using [the 17 steps of this post](https://www.themarketingtechnologist.co/google-oauth-2-enable-your-application-to-access-data-from-a-google-user/). Add a `credentials.py` file to your Python (3.x) project and create variables for the `client_id`, `client_secret` and `redirect_uri` and fill out the corresponding values.
 
 # 2. Connect to the API
 To connect to the Google Analytics API, run `config.py` two times:
 
-1. Your first run prints a URL in the console. Open the URL, grant access to your Google account of choice, and copy the `&code=` parameter value and a `access_code` variable with the value in `credentials.py`.
+1. Your first run prints a URL in the console. Open the URL, grant access to your Google account of choice, copy the `&code=` parameter value and add an `access_code` variable with the parameter value in `credentials.py`.
 2. Your second run prints the access token and refresh token. For both values, create a variable (`access_token` and `refresh_token`) and set the corresponding values.
  - the refresh token is only returned with your first API connection. If the second line says `None`, revoke your app's access at https://myaccount.google.com/permissions, clear the `access_code` and reconnect.
 
