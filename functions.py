@@ -42,6 +42,7 @@ def get_report(analytics, start_date, end_date, view_id, metrics, dimensions):
           'dateRanges': [{'startDate':start_date, 'endDate': end_date}],
           'metrics': metrics,
           'dimensions': dimensions,
+          'pageSize': 10000,
         }]
       }
   ).execute()
