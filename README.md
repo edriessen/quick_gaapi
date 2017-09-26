@@ -14,7 +14,7 @@ To connect to the Google Analytics API, run `config.py` two times:
 All future runs will use the access token and refresh token to connect to the API.
 
 # 3. Run your report.
-Lastly, you can run your reports. The `return_ga_data` function returns a [pandas](http://pandas.pydata.org/) DataFarme. The example code is set to return sessions by source:
+Lastly, you can run `run.py` to return a report in a DataFrame. The `return_ga_data` function returns a [pandas](http://pandas.pydata.org/) DataFarme. The example code is set to return sessions by source:
 
 ```python
 df = return_ga_data(
