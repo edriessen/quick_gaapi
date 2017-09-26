@@ -1,0 +1,5 @@
+oauth2client
+httplib2
+google-api-python-client
+pandas
+xlsxwriter
