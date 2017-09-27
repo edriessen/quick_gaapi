@@ -1,6 +1,7 @@
 import pandas as pd
-import config
-from datetime import datetime, timedelta
+from config import service
+from datetime import datetime
+from dateutil.rrule import rrule, DAILY
 from time import sleep
 
 def convert_reponse_to_df(response):
@@ -54,16 +55,11 @@ def return_ga_data(start_date, end_date, view_id, metrics, dimensions, split_dat
     else:
         start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
         end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
-        delta = end_date - start_date         # timedelta
-        dates = []
-
-        for i in range(delta.days + 1):
-            dates.append(start_date + timedelta(days=i))
 
         df_total = pd.DataFrame()
-        for date in dates:
-            date = str(date)
-            df_total = df_total.append(convert_reponse_to_df(get_report(config.service, date, date, view_id, metrics, dimensions)))
+        for date in rrule(freq=DAILY, dtstart=start_date, until=end_date):
+            date = str(date.date())
+            df_total = df_total.append(convert_reponse_to_df(get_report(service, date, date, view_id, metrics, dimensions)))
             sleep(1)
 
         if len(group_by) != 0:

@@ -6,8 +6,8 @@ df = return_ga_data(
   view_id='100555616',
   metrics=[{'expression': 'ga:sessions'},],
   dimensions=[{'name': 'ga:source'}],
-  split_dates=False,
-  group_by=[]
+  split_dates=True,
+  group_by=['ga:source']
 )
 
 print(df)
