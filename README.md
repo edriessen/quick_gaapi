@@ -40,6 +40,19 @@ A brief description of each parameter:
 - `split_dates`: boolean. If true each day in your date range is queries seperately and merged into a data frame later on.
 - `group_by` (optional): if you enable `split_dates` you can group the data on a dimension of choice. Especially handy when you're not include the date in your export.
 
+## Export to Excel
+
+As not all of your data analyst friends are as cool as you are, I've added basic DataFrame to Excel export function. Here's how you can use it:
+
+```python
+save_df_to_excel(
+  df=df,
+  path='C:\\Users\\Erik\\Documents\\',
+  file_name='test_export',
+  sheet_name='data'
+)
+```
+
 ## To do
 
 - Add support for segments.
