@@ -34,7 +34,7 @@ def convert_reponse_to_df(response):
     return df
 
 
-def get_report(analytics, start_date, end_date, view_id, metrics, dimensions):
+def get_report(analytics, start_date, end_date, view_id, metrics, dimensions, dimensionFilterClauses=[]):
   return analytics.reports().batchGet(
       body={
         'reportRequests': [
@@ -44,14 +44,15 @@ def get_report(analytics, start_date, end_date, view_id, metrics, dimensions):
           'metrics': metrics,
           'dimensions': dimensions,
           'pageSize': 10000,
+          'dimensionFilterClauses': dimensionFilterClauses
         }]
       }
   ).execute()
 
 
-def return_ga_data(start_date, end_date, view_id, metrics, dimensions, split_dates, group_by=False):
+def return_ga_data(start_date, end_date, view_id, metrics, dimensions, split_dates, group_by=[], dimensionFilterClauses=[]):
     if split_dates == False:
-        return convert_reponse_to_df(get_report(service, start_date, end_date, view_id, metrics, dimensions))
+        return convert_reponse_to_df(get_report(service, start_date, end_date, view_id, metrics, dimensions, dimensionFilterClauses))
     else:
         start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
         end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
@@ -59,7 +60,7 @@ def return_ga_data(start_date, end_date, view_id, metrics, dimensions, split_dat
         df_total = pd.DataFrame()
         for date in rrule(freq=DAILY, dtstart=start_date, until=end_date):
             date = str(date.date())
-            df_total = df_total.append(convert_reponse_to_df(get_report(service, date, date, view_id, metrics, dimensions)))
+            df_total = df_total.append(convert_reponse_to_df(get_report(service, date, date, view_id, metrics, dimensions, dimensionFilterClauses)))
             sleep(1)
 
         if len(group_by) != 0:

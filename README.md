@@ -26,7 +26,23 @@ df = return_ga_data(
   metrics=[{'expression': 'ga:sessions'},],
   dimensions=[{'name': 'ga:source'}],
   split_dates=False,
-  group_by=[]
+  group_by=[],
+  dimensionFilterClauses=[
+      {
+          'operator': 'OR',
+          'filters': [
+              {
+                  'dimensionName': 'ga:userType',
+                  'not': False,
+                  'expressions':[
+                    'new visitor'
+                  ],
+                  'caseSensitive': False
+              }
+          ],
+
+      }
+  ],
 )
 ```
 A brief description of each parameter:
@@ -39,6 +55,7 @@ A brief description of each parameter:
 - `dimensions`: the list of dimensions you want to import (max. 9) - full list [here](https://developers.google.com/analytics/devguides/reporting/core/dimsmets).
 - `split_dates`: boolean. If true each day in your date range is queries seperately and merged into a data frame later on.
 - `group_by` (optional): if you enable `split_dates` you can group the data on a dimension of choice. Especially handy when you're not include the date in your export.
+- `dimensionFilterClauses` (optional): filter data based on dimensions if required.
 
 ## Export to Excel
 
