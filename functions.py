@@ -51,7 +51,7 @@ def get_report(analytics, start_date, end_date, view_id, metrics, dimensions):
 
 def return_ga_data(start_date, end_date, view_id, metrics, dimensions, split_dates, group_by=False):
     if split_dates == False:
-        return convert_reponse_to_df(get_report(config.service, start_date, end_date, view_id, metrics, dimensions))
+        return convert_reponse_to_df(get_report(service, start_date, end_date, view_id, metrics, dimensions))
     else:
         start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
         end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
