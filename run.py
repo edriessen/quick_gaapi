@@ -28,6 +28,7 @@ df = return_ga_data(
 
       }
   ],
+  segments=[]
 )
 
 print(df)

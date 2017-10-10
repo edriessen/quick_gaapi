@@ -43,6 +43,7 @@ df = return_ga_data(
 
       }
   ],
+  segments=[]
 )
 ```
 A brief description of each parameter:
@@ -55,7 +56,8 @@ A brief description of each parameter:
 - `dimensions`: the list of dimensions you want to import (max. 9) - full list [here](https://developers.google.com/analytics/devguides/reporting/core/dimsmets).
 - `split_dates`: boolean. If true each day in your date range is queries seperately and merged into a data frame later on.
 - `group_by` (optional): if you enable `split_dates` you can group the data on a dimension of choice. Especially handy when you're not include the date in your export.
-- `dimensionFilterClauses` (optional): filter data based on dimensions if required.
+- `dimensionFilterClauses` (optional): filter data based on dimensions if required ([see documention here](https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#DimensionFilterClause).
+- `segments` (optional): use to apply segments ([see example here](https://developers.google.com/analytics/devguides/reporting/core/v4/samples#segments)). Requires the dimension `ga:segment` in your query.
 
 ## Export to Excel
 
@@ -72,6 +74,5 @@ save_df_to_excel(
 
 ## To do
 
-- Add support for segments.
-- Add support for dimensionFilterClauses.
+- Create function to make use of segments easier.
 
