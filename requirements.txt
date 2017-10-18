@@ -3,4 +3,5 @@ httplib2
 google-api-python-client
 pandas
 xlsxwriter
-dateutil
+python-dateutil
+matplotlib
