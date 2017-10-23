@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
+import math
+
 
 ga_view_id = '100555616'
 query_start_date = '2015-01-01'
@@ -115,8 +117,8 @@ def plot_dual_axis_line_chart(title, df, main_color, sub_color, grid_color, yaxi
     ax2.set_ylabel(right_yaxis_column_name, color=sub_color)
     ax2.tick_params('y', colors=sub_color, width=yaxis_tick_width, length=0)
 
-    yaxis_left_rounded_max = int(round_yvalues_to * round(float(df_plot[left_yaxis_column_name].max()) / round_yvalues_to))
-    yaxis_right_rounded_max = int(round_yvalues_to * round(float(df_plot[right_yaxis_column_name].max()) / round_yvalues_to))
+    yaxis_left_rounded_max = int(round_yvalues_to * math.ceil(float(df_plot[left_yaxis_column_name].max()) / round_yvalues_to))
+    yaxis_right_rounded_max = int(round_yvalues_to * math.ceil(float(df_plot[right_yaxis_column_name].max()) / round_yvalues_to))
 
     ax1.set_yticks(np.arange(0, yaxis_left_rounded_max*1.01, yaxis_left_rounded_max/number_of_yaxis_ticks))
     ax2.set_yticks(np.arange(0, yaxis_right_rounded_max*1.01, yaxis_right_rounded_max/number_of_yaxis_ticks))
