@@ -4,11 +4,21 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 import math
-
+import datetime
+from dateutil import relativedelta
 
 ga_view_id = '100555616'
+
+def return_last_sunday_date_string():
+    yesterday = datetime.date.today() - datetime.timedelta(1)
+    print(yesterday)
+    last_sunday = yesterday - datetime.timedelta((yesterday.weekday() + 1) % 7)
+    print(last_sunday)
+    return str(last_sunday)
+
+
 query_start_date = '2015-01-01'
-query_end_date = '2017-10-15'
+query_end_date = return_last_sunday_date_string()
 
 df_new_users = return_ga_data(
   start_date=query_start_date,
@@ -88,7 +98,7 @@ df_app_growth.rename(columns={'ga:users': 'Weekly Active Users', 'ga:goal1Comple
 df_app_growth = df_app_growth.fillna(0)
 df_app_growth['New App Users (cumulative)'] = df_app_growth['New App Users'].cumsum()
 # df_app_growth = df_app_growth.set_index('Week of Year')
-print(df_app_growth)
+# print(df_app_growth)
 
 
 def plot_dual_axis_line_chart(title, df, main_color, sub_color, grid_color, yaxis_color, xaxis_column_name, left_yaxis_column_name,
